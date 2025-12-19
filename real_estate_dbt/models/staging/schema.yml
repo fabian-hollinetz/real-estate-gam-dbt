@@ -1,0 +1,25 @@
+version: 1
+
+models:
+  - name: stg_transactions
+    description: "Staging table for real estate transactions, cleaning raw source data"
+    columns:
+      - name: transaction_id
+        description: "Unique identifier for each transaction"
+        tests:
+          - not_null
+          - unique
+      - name: price
+        description: "Price of the property"
+        tests:
+          - not_null
+      - name: living_area
+        description: "Living area of the property"
+      - name: rooms
+        description: "Number of rooms"
+      - name: latitude
+        description: "Latitude of the property"
+      - name: longitude
+        description: "Longitude of the property"
+      - name: transaction_date
+        description: "Date of the transaction"

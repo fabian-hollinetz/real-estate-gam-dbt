@@ -1,0 +1,22 @@
+version: 1
+
+models:
+  - name: gam_features
+    description: "Feature table for GAM modeling of real estate prices"
+    columns:
+      - name: price
+        description: "Price of the property"
+        tests:
+          - not_null
+      - name: living_area
+        description: "Living area of the property"
+      - name: rooms
+        description: "Number of rooms"
+      - name: year
+        description: "Year extracted from transaction date"
+        tests:
+          - not_null
+      - name: latitude
+        description: "Latitude of the property"
+      - name: longitude
+        description: "Longitude of the property"
