@@ -1,0 +1,21 @@
+# Python virtual environment (if using venv)
+venv/
+.env
+__pycache__/
+
+# dbt compiled artifacts
+real_estate_dbt/target/
+
+# Logs
+real_estate_dbt/logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor files
+*.idea/
+*.vscode/
+
+# Secrets (never commit passwords)
+profiles.yml
