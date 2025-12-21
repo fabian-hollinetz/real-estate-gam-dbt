@@ -76,3 +76,9 @@ Partial dependence plots will be displayed, and R²/RMSE metrics printed.
 │   └── run_gam.py
 ├── README.md
 └── .gitignore
+
+## Future Work: Listings Data Enrichment
+
+A conceptual architecture for responsibly collecting real estate
+listings data is documented, but intentionally not implemented due to
+legal and ethical considerations.
