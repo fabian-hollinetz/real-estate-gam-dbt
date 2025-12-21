@@ -2,6 +2,9 @@
 venv/
 .env
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # dbt compiled artifacts
 real_estate_dbt/target/
