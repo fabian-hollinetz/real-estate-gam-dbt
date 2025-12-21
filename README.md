@@ -65,7 +65,7 @@ python3 -m src.run_gam
 Partial dependence plots will be displayed, and R²/RMSE metrics printed.
 
 ## Project Structure
-
+```bash
 .
 ├── data/                 # Raw CSVs
 ├── real_estate_dbt/      # dbt project
@@ -76,6 +76,7 @@ Partial dependence plots will be displayed, and R²/RMSE metrics printed.
 │   └── run_gam.py
 ├── README.md
 └── .gitignore
+```
 
 ## Future Work: Listings Data Enrichment
 
