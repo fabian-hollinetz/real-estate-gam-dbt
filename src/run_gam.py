@@ -33,4 +33,4 @@ metrics = evaluate_model(gam, X, y)
 print(f"R²: {metrics['r2']}, RMSE: {metrics['rmse']:.2f}")
 
 # 7 Plot partial dependence
-plot_partial_dependence(gam, X)
+plot_partial_dependence(gam, X, feature_specs=feature_specs)

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, list
+from typing import Any, List
 
 
 class FeatureType(str, Enum):

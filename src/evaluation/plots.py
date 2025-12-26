@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
-def plot_partial_dependence(gam, X):
+
+def plot_partial_dependence(gam, X, feature_specs=None):
     """
     Plots the partial dependence of each feature in the GAM.
     """
@@ -17,7 +18,12 @@ def plot_partial_dependence(gam, X):
             gam.partial_dependence(term=i, X=XX, width=0.95)[1][:, 1],
             alpha=0.2
         )
-        plt.title(f"Effect of {X.columns[i]}")
-        plt.xlabel(X.columns[i])
+        if feature_specs is not None:
+            feat_name = feature_specs[i].name
+        else:
+            feat_name = f"feature_{i}"
+
+        plt.title(f"Effect of {feat_name}")
+        plt.xlabel(feat_name)
         plt.ylabel("Price effect")
         plt.show()
