@@ -1,13 +1,13 @@
 from .data.load_features import load_gam_features
-from .models.gam import fit_gam
-from .evaluation.plots import plot_partial_dependence
 from .evaluation.metrics import evaluate_model
+from .evaluation.plots import plot_partial_dependence
+from .models.gam import fit_gam
 
 # 1 Load data
 df = load_gam_features()
 
 # 2 Define X and y
-X = df[["living_area", "rooms", "year", "latitude", "longitude"]]
+X = df.drop(columns=["price"])
 y = df["price"]
 
 # 3 Fit GAM
