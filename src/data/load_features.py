@@ -1,16 +1,13 @@
-# src/data/load_features.py
 from pathlib import Path
+from typing import cast
 
 import pandas as pd
 
-from .config import OUT_DIR
+from ..config import (DERIVED_COLUMNS, FEATURE_COLUMNS, OUT_DIR,
+                      RENAME_COLUMNS, TARGET_COLUMN, TYPE_CASTS)
 
 
 def load_gam_features(snapshot_year: int | None = None) -> pd.DataFrame:
-    """
-    Loads GAM features from Statistik Austria Parquet snapshots.
-    No encoding. No modeling assumptions.
-    """
     if snapshot_year is None:
         path = OUT_DIR / "flats.parquet"
     else:
@@ -18,19 +15,16 @@ def load_gam_features(snapshot_year: int | None = None) -> pd.DataFrame:
 
     df = pd.read_parquet(path)
 
-    # minimal, non-controversial cleanup
-    df = df.rename(columns={"price_per_m2": "price"})
+    # apply logical schema
+    df = df.rename(columns=RENAME_COLUMNS)
 
-    df["has_external"] = df["has_external"].astype(int)
-    df["year"] = pd.to_datetime(df["snapshot_date"]).dt.year
+    for col, rule in DERIVED_COLUMNS.items():
+        if rule["transform"] == "year":
+            df[col] = pd.to_datetime(df[rule["source"]]).dt.year
 
-    feature_cols = [
-        "district_code",
-        "age_category",
-        "size_band",
-        "has_external",
-        "year",
-        "price",
-    ]
+    for col, dtype in TYPE_CASTS.items():
+        df[col] = df[col].astype(dtype)
 
-    return df[feature_cols]
+    selected_cols: list[str] = FEATURE_COLUMNS + [TARGET_COLUMN]
+    return cast(pd.DataFrame, df[selected_cols])
+

@@ -1,3 +1,4 @@
+from .config import FEATURE_COLUMNS, TARGET_COLUMN
 from .data.load_features import load_gam_features
 from .evaluation.metrics import evaluate_model
 from .evaluation.plots import plot_partial_dependence
@@ -6,9 +7,9 @@ from .models.gam import fit_gam
 # 1 Load data
 df = load_gam_features()
 
-# 2 Define X and y
-X = df.drop(columns=["price"])
-y = df["price"]
+# 2 Define X and y (schema-driven)
+X = df[FEATURE_COLUMNS]
+y = df[TARGET_COLUMN]
 
 # 3 Fit GAM
 gam = fit_gam(X, y)
