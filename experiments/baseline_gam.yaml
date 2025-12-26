@@ -1,0 +1,39 @@
+experiment:
+  name: baseline_gam
+  description: >
+    Baseline GAM using Statistik Austria parquet snapshots.
+    All features treated as categorical factors.
+
+data:
+  snapshot_year: null
+  target: price
+
+features:
+  - name: district_code
+    type: categorical
+    gam_term: factor
+
+  - name: age_category
+    type: categorical
+    gam_term: factor
+
+  - name: size_band
+    type: categorical
+    gam_term: factor
+
+  - name: has_external
+    type: categorical
+    gam_term: factor
+
+  - name: year
+    type: categorical
+    gam_term: factor
+
+gam:
+  default_lam: 0.6
+
+evaluation:
+  metrics:
+    - r2
+    - rmse
+  plot_partial_dependence: true
