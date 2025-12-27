@@ -12,6 +12,9 @@ real_estate_dbt/target/
 # Logs
 real_estate_dbt/logs/
 
+# config
+src/config.py
+
 # OS files
 .DS_Store
 Thumbs.db

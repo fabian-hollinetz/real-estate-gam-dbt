@@ -1,23 +1,31 @@
-from pygam import LinearGAM, s
+from pygam import LinearGAM, f, s
 
-def build_gam():
+from ..features.schema import FeatureSpec
+
+
+def build_gam(feature_specs: list[FeatureSpec]):
     """
-    Defines a LinearGAM with one spline per feature.
-    Assumes X has 5 columns: living_area, rooms, year, latitude, longitude
+    Build LinearGAM dynamically from FeatureSpec list.
+    Categorical features become f(), smooth features become s().
     """
-    gam = LinearGAM(
-        s(0) +  # living_area
-        s(1) +  # rooms
-        s(2) +  # year
-        s(3) +  # latitude
-        s(4)    # longitude
-    )
+    terms = []
+    for i, spec in enumerate(feature_specs):
+        if spec.gam_term == "factor":
+            terms.append(f(i))
+        else:
+            lam = spec.lam if spec.lam is not None else 0.6
+            terms.append(s(i, lam=lam))
+    
+    gam = LinearGAM(sum(terms))
     return gam
 
-def fit_gam(X, y):
+def fit_gam(X, y, feature_specs=None):
     """
-    Fits the GAM to X and y and returns the fitted model.
+    Fit GAM to X, y. Optionally pass FeatureSpec to build terms.
     """
-    gam = build_gam()
+    if feature_specs is not None:
+        gam = build_gam(feature_specs)
+    else:
+        gam = LinearGAM()  # fallback
     gam.fit(X, y)
     return gam
