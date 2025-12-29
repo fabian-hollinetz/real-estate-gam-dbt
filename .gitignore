@@ -12,6 +12,9 @@ real_estate_dbt/target/
 # Logs
 real_estate_dbt/logs/
 
+# dev yaml files
+experiments/dev
+
 # config
 src/config.py
 
