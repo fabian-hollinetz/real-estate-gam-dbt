@@ -1,4 +1,5 @@
 # Python virtual environment (if using venv)
+.venv/
 venv/
 .env
 __pycache__/
@@ -11,6 +12,9 @@ real_estate_dbt/target/
 
 # Logs
 real_estate_dbt/logs/
+
+# dev yaml files
+experiments/dev
 
 # config
 src/config.py
@@ -25,3 +29,5 @@ Thumbs.db
 
 # Secrets (never commit passwords)
 profiles.yml
+flake.nix
+flake.lock

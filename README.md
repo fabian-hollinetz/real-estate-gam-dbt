@@ -58,7 +58,7 @@ This structure ensures that:
 1. **Install dependencies**:
 
 ```bash
-pip install pandas numpy pygam matplotlib scikit-learn
+pip install pandas numpy pygam matplotlib scikit-learn pyyaml
 ```
 
 2. **Set up dbt pipeline** :
