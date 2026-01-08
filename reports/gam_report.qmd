@@ -1,0 +1,77 @@
+---
+title: "Real Estate Price Modeling with GAMs"
+author: "Fabian Hollinetz"
+date: today
+format:
+  pdf:
+    documentclass: article
+    pdf-engine: pdflatex
+execute:
+  kernel: real-estate-gam
+  echo: false
+  freeze: auto
+---
+
+## Overview
+
+This report presents a Generalized Additive Model (GAM) for real estate
+price prediction. The model is built on a clean, reproducible pipeline
+combining dbt-based feature engineering and a Python GAM implementation.
+
+---
+
+## Experiment Configuration
+
+This report corresponds to the baseline experiment:
+
+- Experiment: `baseline_gam.yaml`
+- Model: LinearGAM
+- Target: Price per m²
+
+---
+
+## Data Loading
+
+```{python}
+from pathlib import Path
+from real_estate_gam.run_gam import main
+
+PROJECT_ROOT = Path().resolve().parent
+results = main(experiment_path=PROJECT_ROOT / "experiments/baseline_gam.yaml",
+               return_results=True)
+
+# Model Performance metrics
+gam = results["gam"]
+X = results["X"]
+y = results["y"]
+feature_names = results["feature_names"]
+metrics = results["metrics"]
+
+# Partial Dependence Plots
+
+import matplotlib.pyplot as plt
+
+for i, name in enumerate(feature_names):
+  XX = gam.generate_X_grid(term=i)
+  plt.figure()
+  plt.plot(XX[:, i], gam.partial_dependence(term=i, X=XX))
+  plt.title(f"Effect of {name}")
+  plt.xlabel(name)
+  plt.ylabel("Price effect")
+  plt.tight_layout()
+  plt.show()
+```
+
+## Key Takeaways
+
+- The GAM captures strong non-linear effects.
+- Categorical variables show clear price differentials.
+- The model achieves solid explanatory power while remaining interpretable.
+
+## Reproducibility
+This report was generated from a fully reproducible pipeline.
+To reproduce:
+python3 -m src.run_gam
+quarto render reports/gam_report.qmd
+
+Source code and configuration are available in the public repository.
