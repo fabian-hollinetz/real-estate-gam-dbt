@@ -1,4 +1,5 @@
 # Python virtual environment (if using venv)
+.venv/
 venv/
 .env
 __pycache__/
@@ -28,3 +29,5 @@ Thumbs.db
 
 # Secrets (never commit passwords)
 profiles.yml
+flake.nix
+flake.lock
