@@ -81,7 +81,7 @@ Partial dependence plots will be displayed, and R²/RMSE metrics printed.
 .
 ├── data/ # Raw CSVs and Parquet snapshots
 ├── real_estate_dbt/ # dbt project
-├── src/ # Python GAM pipeline
+├── real_estate_gam/ # Python GAM pipeline
 │ ├── data/ # Feature loading, preprocessing
 │ ├── models/ # GAM building and fitting
 │ ├── evaluation/ # Plots and metrics
