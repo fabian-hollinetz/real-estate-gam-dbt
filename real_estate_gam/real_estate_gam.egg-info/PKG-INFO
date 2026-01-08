@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: real-estate-gam
+Version: 0.1.0
+Summary: Real estate price modeling with dbt and GAMs
+Requires-Python: >=3.10
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: pygam
+Requires-Dist: matplotlib
+Requires-Dist: scikit-learn
+Requires-Dist: pyyaml
