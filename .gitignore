@@ -27,7 +27,9 @@ Thumbs.db
 *.idea/
 *.vscode/
 
-# Secrets (never commit passwords)
-profiles.yml
+# nix
 flake.nix
 flake.lock
+
+# Secrets (never commit passwords)
+profiles.yml
